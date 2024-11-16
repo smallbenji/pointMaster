@@ -27,9 +27,9 @@ namespace pointMaster.Controllers
 
             if (HttpContext.User.Claims.FirstOrDefault(x => x.Value == Roles.Editor) != null)
             {
-                vm.links.Add(new NavUrl("Patruljer", "Patrulje"));
-                vm.links.Add(new NavUrl("Point", "Point"));
-                vm.links.Add(new NavUrl("Poster", "Poster"));
+                vm.links.Add(new NavUrl("Patruljer", "/Patrulje"));
+                vm.links.Add(new NavUrl("Point", "/Point"));
+                vm.links.Add(new NavUrl("Poster", "/Poster"));
             }
 
             return View(vm);

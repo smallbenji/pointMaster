@@ -13,7 +13,7 @@ namespace pointMaster.Controllers
         {
             if (!this.User.Identity!.IsAuthenticated)
             {
-                return this.Challenge(OpenIdConnectDefaults.AuthenticationScheme);
+                return Challenge(OpenIdConnectDefaults.AuthenticationScheme);
             }
 
             return Redirect(redirectUrl);

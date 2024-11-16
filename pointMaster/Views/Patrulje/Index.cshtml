@@ -1,11 +1,14 @@
 ﻿@model pointMaster.Controllers.PatruljeController.IndexViewModel
 
 <h1>Patruljer</h1>
+<a asp-action="Create" asp-controller="Patrulje" class="btn btn-primary">Opret patrulje</a>
 @foreach (var patrulje in Model.patruljeModels)
 {
     <div class="border m-4 p-4 rounded">
         <div class="d-flex flex-row justify-content-between">
             <h2>@patrulje.Name</h2>
+            <p>Points: @Model.patruljePoints[patrulje.Id]</p>
+            <p>Turnout: @Model.patruljeTurnout[patrulje.Id]</p>
             <div class="my-auto">
                 <a 
                     asp-action="DeletePatrulje" 

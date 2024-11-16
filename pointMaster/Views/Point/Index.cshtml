@@ -1,5 +1,30 @@
-﻿@*
+﻿@model pointMaster.Controllers.PointViewModel;
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
+<a asp-action="GivPoint" asp-controller="Point" class="btn btn-primary">Giv point</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Patrulje</th>
+            <th scope="col">Post</th>
+            <th scope="col">Point</th>
+            <th scope="col">Turnout</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var point in Model.points)
+        {
+            <tr>
+                <td scope="row">@point.Patrulje.Name</td>
+                <td scope="row">@point.Poster.Name</td>
+                <td scope="row">@point.Points</td>
+                <td scope="row">@point.Turnout</td>
+                <td scope="row"><a asp-action="DeletePoint" asp-controller="Point" asp-route-id="@point.Id" class="btn btn-danger">Slet point</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

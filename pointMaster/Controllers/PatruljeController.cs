@@ -20,7 +20,25 @@ namespace pointMaster.Controllers
         public async Task<IActionResult> Index()
         {
             var vm = new IndexViewModel();
-            vm.patruljeModels = await _context.Patruljer.Include(p => p.PatruljeMedlems).ToListAsync();
+
+            vm.patruljePoints = new Dictionary<int, int>();
+            vm.patruljeTurnout = new Dictionary<int, int>();
+
+            vm.patruljeModels = await _context.Patruljer.Include(p => p.PatruljeMedlems).Include(p => p.Points).ToListAsync();
+
+            foreach (var patrulje in vm.patruljeModels)
+            {
+                if (patrulje.Points == null)
+                {
+                    vm.patruljePoints.Add(patrulje.Id, 0);
+                    vm.patruljeTurnout.Add(patrulje.Id, 0);
+
+                    continue;
+                }
+
+                vm.patruljePoints.Add(patrulje.Id, patrulje.Points.Sum(x => x.Points));
+                vm.patruljeTurnout.Add(patrulje.Id, patrulje.Points.Sum(x => x.Turnout));
+            }
 
             return View(vm);
         }
@@ -108,7 +126,9 @@ namespace pointMaster.Controllers
 
         public class IndexViewModel
         {
-            public List<Patrulje> patruljeModels { get; set; }
+            public List<Patrulje> patruljeModels { get; set; } = null!;
+            public Dictionary<int, int> patruljePoints { get; set; } = null!;
+            public Dictionary<int, int> patruljeTurnout {  get; set; } = null!;
         }
     }
 }

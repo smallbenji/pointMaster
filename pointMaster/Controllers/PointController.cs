@@ -16,14 +16,27 @@ namespace pointMaster.Controllers
             this.context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var vm = new PointViewModel();
+
+            vm.points = await context.Points.Include(p => p.Patrulje).Include(p => p.Poster).ToListAsync();
+
+            return View(vm);
         }
 
-        public IActionResult SkiftPatrulje()
+        public async Task<IActionResult> SkiftPatrulje()
         {
             var vm = new SkiftPatruljeViewModel();
+
+            if (string.IsNullOrEmpty(Request.Cookies["Post"]))
+            {
+                return RedirectToAction(nameof(SelectPoster));
+            }
+
+            int.TryParse(Request.Cookies["Post"], out var postId);
+
+            vm.post = await context.Poster.FindAsync(postId);
 
             vm.Patruljer = context.Patruljer.ToList();
 
@@ -125,7 +138,18 @@ namespace pointMaster.Controllers
 
             Response.Cookies.Append("Post", id.ToString(), cookieOptions);
 
-            return RedirectToAction("index", "home");
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult DeletePoint(int id)
+        {
+            var point = context.Points.FirstOrDefault(p => p.Id == id);
+            if (point == null) { return NotFound(); }
+
+            context.Points.Remove(point);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 
@@ -143,5 +167,10 @@ namespace pointMaster.Controllers
     public class SkiftPatruljeViewModel
     {
         public List<Patrulje> Patruljer { get; set; } = null!;
+        public Post? post { get; set; } = null!;
+    }
+    public class PointViewModel
+    {
+        public List<Point> points { get; set; } = null!;
     }
 }

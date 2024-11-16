@@ -1,4 +1,8 @@
 ﻿@model pointMaster.Controllers.SkiftPatruljeViewModel;
+@if (Model.post != null)
+{
+    <h3>Du giver point som: @Model.post.Name</h3>
+}
 <h1>Vælg patrulje</h1>
 @foreach (var patrulje in Model.Patruljer)
 {
