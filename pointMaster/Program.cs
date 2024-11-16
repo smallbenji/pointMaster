@@ -49,6 +49,11 @@ builder
     .AddPolicy(Roles.Editor, policy => policy.RequireRealmRoles(Roles.Editor))
     .AddPolicy(Roles.Postmaster, policy => policy.RequireRealmRoles(Roles.Postmaster));
 
+builder
+    .Services.Configure<ForwardedHeadersOptions>(options =>
+    {
+        options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
+    });
 
 var app = builder.Build();
 
@@ -58,7 +63,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-
+app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
