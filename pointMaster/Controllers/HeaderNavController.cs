@@ -23,6 +23,10 @@ namespace pointMaster.Controllers
             {
                 vm.links.Add(new NavUrl("Giv point", "/point/givpoint"));
             }
+            else
+            {
+                vm.links.Add(new NavUrl("Log ind", "/account/signin"));
+            }
 
 
             if (HttpContext.User.Claims.FirstOrDefault(x => x.Value == Roles.Editor) != null)

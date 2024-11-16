@@ -9,6 +9,28 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
+            <h3>Point</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Patrulje</th>
+                        <th>Point</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Points.Count; i++)
+                    {
+                            <tr>
+                                <td>@(i + 1)</td>
+                                <td>@Model.Points[i].Patrulje.Name</td>
+                                <td>@Model.Points[i].point</td>
+                            </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm">
             <h3>Samlet</h3>
             <table class="table table-striped">
                 <thead>
@@ -25,28 +47,6 @@
                             <td>@(i+1)</td>
                             <td>@Model.Samlet[i].Patrulje.Name</td>
                             <td>@Model.Samlet[i].point</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm">
-            <h3>Point</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Patrulje</th>
-                        <th>Point</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (var i = 0; i < Model.Points.Count; i++)
-                    {
-                        <tr>
-                            <td>@(i+1)</td>
-                            <td>@Model.Points[i].Patrulje.Name</td>
-                            <td>@Model.Points[i].point</td>
                         </tr>
                     }
                 </tbody>
