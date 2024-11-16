@@ -63,6 +63,12 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+app.Use((context, next) =>
+{
+    context.Request.Scheme = "https";
+    return next(context);
+});
+
 app.UseForwardedHeaders();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
