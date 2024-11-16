@@ -1,0 +1,8 @@
+﻿@model pointMaster.Controllers.HeaderNavViewModel
+
+@foreach(var item in Model.links)
+{
+    <li class="nav-item">
+        <a href="@item.Url" class="nav-link text-dark">@item.Title</a>
+    </li>
+}

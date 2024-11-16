@@ -1,0 +1,39 @@
+﻿.Frame {
+    height: 100vh;
+    width: 100vw;
+    padding: 1rem;
+}
+
+.Frame .Post {
+    width: calc(100vw - 2rem);
+    height: 3rem;
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.Post h1 {
+    margin: auto;
+}
+
+.button-group {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-evenly;
+    height: 3rem;
+    width: 100vw;
+}
+
+.inputfield {
+    margin-top: 2rem;
+}
+
+.sendButton {
+    width: calc(100vw - 2rem);
+    display: flex;
+    margin-top: 2rem;
+}
+
+.sendButton .btn {
+    margin: auto;
+}

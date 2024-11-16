@@ -1,0 +1,43 @@
+﻿@model pointMaster.Controllers.PatruljeController.IndexViewModel
+
+<h1>Patruljer</h1>
+@foreach (var patrulje in Model.patruljeModels)
+{
+    <div class="border m-4 p-4 rounded">
+        <div class="d-flex flex-row justify-content-between">
+            <h2>@patrulje.Name</h2>
+            <div class="my-auto">
+                <a 
+                    asp-action="DeletePatrulje" 
+                    asp-route-id="@patrulje.Id" 
+                    class="btn btn-danger">
+                    Slet patrulje
+                </a>
+            </div>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Navn</th>
+                    <th scope="col">Alder</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>   
+            <tbody>
+                @foreach (var medlem in patrulje.PatruljeMedlems)
+                {
+                    <tr>
+                        <td scope="row">@medlem.Id</td>
+                        <td scope="row">@medlem.Name</td>
+                        <td scope="row">@medlem.Age</td>
+                        <td scope="row" class="d-flex justify-content-end">
+                            <a asp-action="DeleteMedlem" asp-route-id="@medlem.Id" class="btn btn-danger">Slet medlem</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a asp-action="AddMedlem" class="btn btn-primary" asp-route-id="@patrulje.Id">Tilføj medlem</a>
+    </div>
+}

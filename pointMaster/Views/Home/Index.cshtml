@@ -1,0 +1,18 @@
+﻿@model pointMaster.Controllers.HomePageViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <h1>Velkommen til PointMaster</h1>
+</div>
+
+
+@if (Model.loggedIn)
+{
+    <a class="btn btn-primary" asp-action="GivPoint" asp-controller="Point">Giv point</a>
+}
+else
+{
+    <a class="btn btn-primary" asp-action="signin" asp-controller="Account">Log ind</a>
+}

@@ -1,0 +1,13 @@
+﻿@model pointMaster.Controllers.SelectPostViewModel
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<h1>Vælg post</h1>
+@foreach(var item in Model.Poster)
+{
+    <div>
+        <a asp-action="SelectPost" asp-route-id="@item.Id" class="btn btn-primary mb-2">@item.Name</a>
+    </div>
+}

@@ -1,0 +1,35 @@
+﻿@model pointMaster.Controllers.GivPointViewModel;
+@{
+    Layout = "_Point";
+}
+
+<div class="Frame">
+    <div class="Post">
+        <h1>@Model.Runde.Name</h1>
+    </div>
+
+    <h2>@Model.Patrulje.Name</h2>
+    <form asp-action="GivPoint">
+    <div class="inputfield">
+        <h4>Point</h4>
+        <input asp-for="points.Points" type="number" min="0" max="10" class="form-control" />
+    </div>
+    <div class="inputfield">
+        <h4>Turnout</h4>
+        <input asp-for="points.Turnout" type="number" min="0" max="10" class="form-control" />
+    </div>
+
+    <div class="sendButton">
+        <input type="submit" class="btn btn-success" value="Giv point" />
+    </div>
+    </form>
+</div>
+
+<div class="button-group">
+    <div class="button-group-button">
+        <a asp-action="SelectPoster" asp-controller="Point" class="btn btn-primary">Skift Post</a>
+    </div>
+    <div class="button-group-button">
+        <a asp-action="SkiftPatrulje" asp-controller="Point" class="btn btn-primary">Skift Patrulje</a>
+    </div>
+</div>
