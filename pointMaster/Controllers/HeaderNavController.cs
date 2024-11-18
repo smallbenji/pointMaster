@@ -25,8 +25,7 @@ namespace pointMaster.Controllers
                 vm.links.Add(new NavUrl("Point", "/Point"));
                 vm.links.Add(new NavUrl("Poster", "/Poster"));
             }
-
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity != null && User.Identity.IsAuthenticated)
             {
                 vm.links.Add(new NavUrl("Giv point", "/point/givpoint"));
                 vm.links.Add(new NavUrl("Log ud", "/account/signout"));
