@@ -45,7 +45,7 @@ namespace pointMaster.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SletPost(int id)
+        public ActionResult SletPost(int id)
         {
             var post = _context.Poster.Find(id);
 
@@ -62,7 +62,7 @@ namespace pointMaster.Controllers
 
         public class RundeViewModel
         {
-            public List<Post> Rounds { get; set; }
+            public List<Post> Rounds { get; set; } = null!;
         }
     }
 }

@@ -19,21 +19,21 @@ namespace pointMaster.Controllers
 
             vm.links = new List<NavUrl>();
 
-            if (User.Identity.IsAuthenticated)
-            {
-                vm.links.Add(new NavUrl("Giv point", "/point/givpoint"));
-            }
-            else
-            {
-                vm.links.Add(new NavUrl("Log ind", "/account/signin"));
-            }
-
-
             if (HttpContext.User.Claims.FirstOrDefault(x => x.Value == Roles.Editor) != null)
             {
                 vm.links.Add(new NavUrl("Patruljer", "/Patrulje"));
                 vm.links.Add(new NavUrl("Point", "/Point"));
                 vm.links.Add(new NavUrl("Poster", "/Poster"));
+            }
+
+            if (User.Identity.IsAuthenticated)
+            {
+                vm.links.Add(new NavUrl("Giv point", "/point/givpoint"));
+                vm.links.Add(new NavUrl("Log ud", "/account/signout"));
+            }
+            else
+            {
+                vm.links.Add(new NavUrl("Log ind", "/account/signin"));
             }
 
             return View(vm);
