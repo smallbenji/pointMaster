@@ -1,5 +1,7 @@
 ﻿@model pointMaster.Controllers.PatruljeController.IndexViewModel
-
+@{
+    ViewData["Title"] = "Patruljer";
+}
 <h1>Patruljer</h1>
 <a asp-action="Create" asp-controller="Patrulje" class="btn btn-primary">Opret patrulje</a>
 @foreach (var patrulje in Model.patruljeModels)
