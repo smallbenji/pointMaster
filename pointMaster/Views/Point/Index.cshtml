@@ -10,7 +10,9 @@
             <th scope="col">Post</th>
             <th scope="col">Point</th>
             <th scope="col">Turnout</th>
-            <th scope="col"></th>
+            @if (Model.AllowedToDelete) {
+                <th scope="col"></th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -21,7 +23,9 @@
                 <td scope="row">@point.Poster.Name</td>
                 <td scope="row">@point.Points</td>
                 <td scope="row">@point.Turnout</td>
-                <td scope="row"><a asp-action="DeletePoint" asp-controller="Point" asp-route-id="@point.Id" class="btn btn-danger">Slet point</a></td>
+                @if (Model.AllowedToDelete) {
+                    <td scope="row"><a asp-action="DeletePoint" asp-controller="Point" asp-route-id="@point.Id" class="btn btn-danger">Slet point</a></td>
+                }
             </tr>
         }
     </tbody>

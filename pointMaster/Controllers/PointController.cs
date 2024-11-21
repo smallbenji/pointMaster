@@ -22,6 +22,13 @@ namespace pointMaster.Controllers
 
             vm.points = await context.Points.Include(p => p.Patrulje).Include(p => p.Poster).ToListAsync();
 
+            vm.AllowedToDelete = false;
+
+            if (HttpContext.User.Claims.FirstOrDefault(x => x.Value == Roles.Editor) != null)
+            {
+                vm.AllowedToDelete = true;
+            }
+
             return View(vm);
         }
 
@@ -172,5 +179,6 @@ namespace pointMaster.Controllers
     public class PointViewModel
     {
         public List<Point> points { get; set; } = null!;
+        public bool AllowedToDelete { get; set; } = false;
     }
 }
