@@ -35,6 +35,8 @@ namespace pointMaster.Controllers
         {
             if (ModelState.IsValid)
             {
+                runde.DateCreated = DateTime.UtcNow;
+
                 _context.Poster.Add(runde);
                 await _context.SaveChangesAsync();
 

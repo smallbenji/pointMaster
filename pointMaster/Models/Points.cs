@@ -7,5 +7,6 @@
         public int Turnout { get; set; }
         public Patrulje Patrulje { get; set; } = null!;
         public Post Poster { get; set; } = null!;
+        public DateTime? DateCreated { get; set; }
     }
 }

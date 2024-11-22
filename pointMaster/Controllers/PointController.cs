@@ -120,6 +120,8 @@ namespace pointMaster.Controllers
             p.Turnout = point.points.Turnout;
             p.Points = point.points.Points;
 
+            p.DateCreated = DateTime.UtcNow;
+
             context.Points.Add(p);
 
             await context.SaveChangesAsync();

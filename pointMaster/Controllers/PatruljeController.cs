@@ -51,6 +51,8 @@ namespace pointMaster.Controllers
         [HttpPost]
         public IActionResult Create(Patrulje patrulje)
         {
+            patrulje.DateCreated = DateTime.UtcNow;
+
             _context.Patruljer.Add(patrulje);
             _context.SaveChanges();
 
@@ -81,6 +83,7 @@ namespace pointMaster.Controllers
                 var patrulje = await _context.Patruljer.FindAsync(id);
 
                 medlem.Patrulje = patrulje;
+                medlem.DateCreated = DateTime.UtcNow;
 
                 _context.PatruljeMedlemmer.Add(medlem);
                 await _context.SaveChangesAsync();

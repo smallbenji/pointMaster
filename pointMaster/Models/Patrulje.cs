@@ -6,6 +6,7 @@
         public string Name { get; set; } = null!;
         public List<PatruljeMedlem> PatruljeMedlems { get; set; } = null!;
         public List<Point> Points { get; set; } = null!;
+        public DateTime? DateCreated { get; set; }
     }
 
     public class PatruljeMedlem
@@ -14,5 +15,6 @@
         public string Name { get; set; } = null!;
         public int Age { get; set; }
         public Patrulje Patrulje { get; set; } = null!;
+        public DateTime? DateCreated { get; set; }
     }
 }
