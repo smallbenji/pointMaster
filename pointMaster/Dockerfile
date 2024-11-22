@@ -1,36 +1,39 @@
-# See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-# This stage is used when running from VS in fast mode (Default for Debug configuration)
+# Base image for runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 USER app
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
 
-
-# This stage is used to build the service project
+# Build stage for ASP.NET Core
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["pointMaster/pointMaster.csproj", "pointMaster/"]
-RUN dotnet restore "./pointMaster/pointMaster.csproj"
-COPY . .
-WORKDIR "/src/pointMaster"
+COPY ["pointMaster.csproj", "./"]
+RUN dotnet restore "./pointMaster.csproj"
+COPY . . 
+WORKDIR "/src"
 RUN dotnet build "./pointMaster.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
-FROM node:20 AS node-build
+# Build stage for Vue.js app
+FROM node:18 AS node-build
 WORKDIR /js-app
 COPY ["js/package.json", "js/package-lock.json*", "./"]
 RUN npm install
 COPY js/ .
 RUN npm run build
+RUN ls -la /js-app
+RUN ls -la /wwwroot/js/dist
 
-# This stage is used to publish the service project to be copied to the final stage
+# Publish ASP.NET Core app
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./pointMaster.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
-# This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
+# Copy Vue.js build output to ASP.NET Core wwwroot
+COPY --from=node-build /wwwroot/js/dist /app/publish/wwwroot/js/dist
+
+# Final runtime stage
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
