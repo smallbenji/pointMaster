@@ -1,0 +1,24 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "vue-cli-service build --mode development --watch",
+    "build": "vue-cli-service build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vue/cli-plugin-typescript": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "apexcharts": "^4.0.0",
+    "axios": "^1.7.7",
+    "vue": "^3.5.13",
+    "vue-class-component": "^7.2.6"
+  },
+  "devDependencies": {
+    "vue-cli-service": "^5.0.10"
+  }
+}

@@ -18,6 +18,13 @@ COPY . .
 WORKDIR "/src/pointMaster"
 RUN dotnet build "./pointMaster.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
+FROM node:20 AS node-build
+WORKDIR /js-app
+COPY ["js/package.json", "js/package-lock.json*", "./"]
+RUN npm install
+COPY js/ .
+RUN npm run build
+
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
