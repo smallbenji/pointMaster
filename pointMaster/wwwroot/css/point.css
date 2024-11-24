@@ -37,3 +37,31 @@
 .sendButton .btn {
     margin: auto;
 }
+
+.print-card {
+    display: flex;
+    border: 1px solid black;
+    margin-bottom: 1rem;
+}
+
+.print-card .patrulje-info {
+    padding: 5px;
+    padding-left: 1rem;
+}
+
+.print-card .patrulje-info h1 {
+    font-size: 4rem;
+}
+
+.print-card .patrulje-info p {
+    font-size: 1.75rem;
+    line-height: 1rem;
+}
+
+.print-card img {
+    padding: 10px;
+}
+
+.print-card .flex-grow {
+    flex-grow: 1;
+}

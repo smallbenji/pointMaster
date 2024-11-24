@@ -1,0 +1,25 @@
+﻿@model pointMaster.Controllers.PrintPatruljerModel;
+@{
+	Layout = "_Point";
+	ViewData["Title"] = "Patruljer";
+}
+
+@foreach (var patrulje in Model.patruljer)
+{
+	<div class="print-card">
+		<div class="patrulje-info">
+			<h1>@patrulje.Name</h1>
+			<p>Medlemmer:</p>
+			@foreach (var medlem in patrulje.PatruljeMedlems)
+			{
+				<p>@medlem.Name</p>
+			}
+		</div>
+		<div class="flex-grow"></div>
+		<img src="@Model.QRcode[patrulje.Id]" width="300" height="300" />
+	</div>
+}
+
+<script>
+	print()
+</script>

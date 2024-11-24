@@ -4,6 +4,7 @@
 }
 <h1>Patruljer</h1>
 <a asp-action="Create" asp-controller="Patrulje" class="btn btn-primary">Opret patrulje</a>
+<a asp-action="Patruljer" asp-controller="Print" class="ms-4 btn btn-secondary">Print patruljer</a>
 @foreach (var patrulje in Model.patruljeModels)
 {
     <div class="border m-4 p-4 rounded">
