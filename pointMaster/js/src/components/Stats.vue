@@ -1,7 +1,7 @@
 <template>
     <div class="stat-dashboard">
         <div class="stat-panel">
-            <h1>Stats</h1>
+            <h1>Statistikker</h1>
             <div class="stats">
                 <div
                     class="stat"

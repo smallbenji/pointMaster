@@ -3,9 +3,9 @@
     ViewData["Title"] = "Vælg post";
 }
 <h1>Vælg post</h1>
+<ul class="list-group">
 @foreach(var item in Model.Poster)
 {
-    <div>
-        <a asp-action="SelectPost" asp-route-id="@item.Id" class="btn btn-primary mb-2">@item.Name</a>
-    </div>
+        <a asp-action="SelectPost" asp-route-id="@item.Id" class="btn btn-primary">@item.Name</a>
 }
+</ul>

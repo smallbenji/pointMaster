@@ -38,7 +38,7 @@ namespace pointMaster.Controllers
 
             if (string.IsNullOrEmpty(Request.Cookies["Post"]))
             {
-                return RedirectToAction(nameof(SelectPoster));
+                return RedirectToAction(nameof(SkiftPost));
             }
 
             int.TryParse(Request.Cookies["Post"], out var postId);
@@ -56,7 +56,7 @@ namespace pointMaster.Controllers
             {
                 if (string.IsNullOrEmpty(Request.Cookies["Post"]))
                 {
-                    return RedirectToAction(nameof(SelectPoster));
+                    return RedirectToAction(nameof(SkiftPost));
                 }
                 else
                 {
@@ -80,7 +80,7 @@ namespace pointMaster.Controllers
 
             if (postId == null)
             {
-                return RedirectToAction(nameof(SelectPoster));
+                return RedirectToAction(nameof(SkiftPost));
             }
             int.TryParse(postId, out var postIntId);
 
@@ -129,7 +129,7 @@ namespace pointMaster.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> SelectPoster()
+        public async Task<IActionResult> SkiftPost()
         {
             var vm = new SelectPostViewModel();
 
@@ -147,7 +147,7 @@ namespace pointMaster.Controllers
 
             Response.Cookies.Append("Post", id.ToString(), cookieOptions);
 
-            return RedirectToAction(nameof(Index));
+            return Redirect("/");
         }
 
         public ActionResult DeletePoint(int id)
