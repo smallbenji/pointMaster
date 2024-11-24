@@ -99,6 +99,25 @@ namespace pointMaster.Controllers
             return Ok(JsonConvert.SerializeObject(vm));
         }
 
+        [Route("pointratio")]
+        public async Task<IActionResult> GetPointRatio()
+        {
+            var vm = new PointRatioModel();
+
+            vm.Names = new List<string>();
+            vm.Data = new List<int>();
+
+            var data = await dataContext.Patruljer.Include(x => x.Points).ToListAsync();
+
+            foreach (var patrulje in data)
+            {
+                vm.Names.Add(patrulje.Name);
+                vm.Data.Add(patrulje.Points.Sum(x => x.Points + x.Turnout));
+            }
+
+            return Ok(JsonConvert.SerializeObject(vm));
+        }
+
         public class PointChartModel
         {
             [JsonProperty("name")]
@@ -116,6 +135,14 @@ namespace pointMaster.Controllers
         {
             public string Title { get; set; } = null!;
             public string Value { get; set; } = null!;
+        }
+
+        public class PointRatioModel
+        {
+            [JsonProperty("names")]
+            public List<string> Names { get; set; } = null!;
+            [JsonProperty("data")]
+            public List<int> Data { get; set; } = null!;
         }
     }
 }

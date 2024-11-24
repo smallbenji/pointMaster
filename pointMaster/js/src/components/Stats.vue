@@ -16,6 +16,8 @@
         <div class="stat-chart">
             <p class="stat-title">Point over tid</p>
             <div id="chart"></div>
+            <p class="stat-title">Point ratio</p>
+            <div id="pie"></div>
         </div>
     </div>
 </template>
@@ -41,7 +43,7 @@ export default defineComponent({
                 chart: {
                     type: "line",
                     toolbar: {
-                        show: false,
+                        show: true,
                     },
                 },
                 xaxis: {
@@ -63,9 +65,35 @@ export default defineComponent({
             } as ApexOptions);
         };
 
+        const initializePieChart = async () => {
+            const options: ApexOptions = {
+                chart: {
+                    type: "pie",
+                    toolbar: {
+                        show: true,
+                    },
+                },
+                series: [],
+            };
+
+            const chart = new ApexCharts(
+                document.querySelector("#pie"),
+                options
+            );
+            chart.render();
+
+            const data = (await axios.get("/api/pointratio")).data;
+
+            chart.updateOptions({
+                series: data.data,
+                labels: data.names,
+            } as ApexOptions);
+        };
+
         onMounted(async () => {
             await GetStats();
             await initializeChart();
+            await initializePieChart();
         });
 
         return {
