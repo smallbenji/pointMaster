@@ -1,15 +1,19 @@
 <template>
     <div class="stat-dashboard">
-        <div>
+        <div class="stat-panel">
             <h1>Stats</h1>
             <div class="stats">
-                <div class="stat" v-for="(data, index) in StatData" :key="index">
+                <div
+                    class="stat"
+                    v-for="(data, index) in StatData"
+                    :key="index"
+                >
                     <p class="stat-title">{{ data.Title }}</p>
                     <p class="stat-value">{{ data.Value }}</p>
                 </div>
             </div>
         </div>
-        <div>
+        <div class="stat-chart">
             <p class="stat-title">Point over tid</p>
             <div id="chart"></div>
         </div>
@@ -17,10 +21,9 @@
 </template>
 
 <script lang="ts">
-import ApexCharts, { ApexOptions } from 'apexcharts';
-import axios from 'axios';
-import { defineComponent, onMounted, ref } from 'vue';
-
+import ApexCharts, { ApexOptions } from "apexcharts";
+import axios from "axios";
+import { defineComponent, onMounted, ref } from "vue";
 
 export default defineComponent({
     name: "Stats",
@@ -28,7 +31,7 @@ export default defineComponent({
         const StatData = ref<Stat[]>([]);
 
         const GetStats = async () => {
-            const data = (await axios.get("/api/getstats")).data as Stat[]
+            const data = (await axios.get("/api/getstats")).data as Stat[];
 
             StatData.value = data;
         };
@@ -42,18 +45,21 @@ export default defineComponent({
                     },
                 },
                 xaxis: {
-                    type: "datetime"
+                    type: "datetime",
                 },
-                series: []
+                series: [],
             };
 
-            const chart = new ApexCharts(document.querySelector("#chart"), options);
+            const chart = new ApexCharts(
+                document.querySelector("#chart"),
+                options
+            );
             chart.render();
 
             const data = (await axios.get("/api/GetPointsOverTime")).data;
 
             chart.updateOptions({
-                series: data
+                series: data,
             } as ApexOptions);
         };
 
@@ -63,40 +69,52 @@ export default defineComponent({
         });
 
         return {
-            StatData
-        }
-    }
-})
-
+            StatData,
+        };
+    },
+});
 </script>
 
-<style lang="css">
+<style lang="scss">
 .stat-dashboard {
     display: flex;
-    height: 60vh;
     justify-content: space-between;
+    flex-direction: row;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 
-#chart {
-    height: 300px;
-    width: 500px;
+.stat-panel {
+    @media (max-width: 768px) {
+        margin-bottom: 2rem;
+    }
+}
+
+.stat-chart {
+    flex-grow: 1;
 }
 
 .stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 2rem;
-    max-width: 50vw;
-}
 
-.stat {
-    background-color: rgba(0, 0, 0, 0.1);
-    padding: 10px;
-    height: 7rem;
-    width: 10rem;
-    border-radius: 5px;
-    text-align: center;
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+    @media (max-width: 1000px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat {
+        background-color: rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        height: 7rem;
+        width: 10rem;
+        border-radius: 5px;
+        text-align: center;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        margin: auto;
+    }
 }
 
 .stat-title {

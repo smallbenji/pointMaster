@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using pointMaster.Data;
-using pointMaster.Models;
 
 namespace pointMaster.Controllers
 {
@@ -76,11 +75,25 @@ namespace pointMaster.Controllers
             var vm = new List<StatModel>();
 
             var pointData = await dataContext.Points.ToListAsync();
+            var patruljeData = await dataContext.Patruljer.ToListAsync();
+            var postData = await dataContext.Poster.ToListAsync();
 
             vm.Add(new StatModel
             {
                 Title = "Points givet",
                 Value = pointData.Sum(x => x.Points + x.Turnout).ToString()
+            });
+
+            vm.Add(new StatModel
+            {
+                Title = "Antal patruljer",
+                Value = patruljeData.Count().ToString()
+            });
+
+            vm.Add(new StatModel
+            {
+                Title = "Antal poster",
+                Value = postData.Count().ToString()
             });
 
             return Ok(JsonConvert.SerializeObject(vm));
