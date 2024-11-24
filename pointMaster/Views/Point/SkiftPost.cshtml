@@ -6,6 +6,6 @@
 <ul class="list-group">
 @foreach(var item in Model.Poster)
 {
-        <a asp-action="SelectPost" asp-route-id="@item.Id" class="btn btn-primary">@item.Name</a>
+        <a asp-action="SelectPost" asp-route-id="@item.Id" class="list-group-item">@item.Name</a>
 }
 </ul>

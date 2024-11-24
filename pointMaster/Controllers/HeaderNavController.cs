@@ -24,12 +24,12 @@ namespace pointMaster.Controllers
                 vm.links.Add(new NavUrl("Patruljer", "/Patrulje"));
                 vm.links.Add(new NavUrl("Point", "/Point"));
                 vm.links.Add(new NavUrl("Poster", "/Poster"));
-                vm.links.Add(new NavUrl("Statistikker", "/stats"));
+                vm.links.Add(new NavUrl("Statistikker", "/Stats"));
             }
             if (User.Identity != null && User.Identity.IsAuthenticated)
             {
-                vm.links.Add(new NavUrl("Giv point", "/point/givpoint"));
-                vm.links.Add(new NavUrl("Vælg post", "/point/skiftpost"));
+                vm.links.Add(new NavUrl("Giv point", "/Point/GivPoint"));
+                vm.links.Add(new NavUrl("Vælg post", "/Point/SkiftPost"));
                 vm.links.Add(new NavUrl("Log ud", "/account/signout"));
             }
             else

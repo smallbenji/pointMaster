@@ -1,0 +1,34 @@
+﻿@model pointMaster.Controllers.PatruljeInfoModel
+
+<h1>@Model.patrulje.Name</h1>
+
+<p>Total points: @Model.totalPoints</p>
+<p>total turnout: @Model.totalTurnout</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Post navn</th>
+            <th scope="col">Points</th>
+            <th scope="col">Turnout</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.patrulje.Points.Any())
+        {
+            @foreach (var point in Model.patrulje.Points)
+            {
+                <tr>
+                    <td scope="row">@point.Poster.Name</td>
+                    <td scope="row">@point.Turnout</td>
+                    <td scope="row">@point.Points</td>
+                </tr>
+            } 
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">Ingen point givet</td>
+            </tr>
+        }
+    </tbody>
+</table>

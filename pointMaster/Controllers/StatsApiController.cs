@@ -6,6 +6,7 @@ using pointMaster.Data;
 
 namespace pointMaster.Controllers
 {
+    [Authorize(Policy = Roles.Editor)]
     [ApiController]
     [Route("api")]
     public class StatsApiController : ControllerBase
@@ -17,7 +18,6 @@ namespace pointMaster.Controllers
             this.dataContext = dataContext;
         }
 
-        [Authorize(Policy = Roles.Editor)]
         [HttpGet("GetPointsOverTime")]
         public async Task<object> GetList()
         {

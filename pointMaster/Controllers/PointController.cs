@@ -6,7 +6,6 @@ using pointMaster.Models;
 
 namespace pointMaster.Controllers
 {
-    [Authorize(Policy = Roles.Postmaster)]
     public class PointController : Controller
     {
         private readonly DataContext context;
@@ -15,7 +14,7 @@ namespace pointMaster.Controllers
         {
             this.context = context;
         }
-
+        [Authorize(Policy = Roles.Postmaster)]
         public async Task<IActionResult> Index()
         {
             var vm = new PointViewModel();
@@ -31,7 +30,7 @@ namespace pointMaster.Controllers
 
             return View(vm);
         }
-
+        [Authorize(Policy = Roles.Postmaster)]
         public async Task<IActionResult> SkiftPatrulje()
         {
             var vm = new SkiftPatruljeViewModel();
@@ -49,9 +48,31 @@ namespace pointMaster.Controllers
 
             return View(vm);
         }
-        
+
         public async Task<IActionResult> GivPoint(int id = 0)
         {
+            if (!HttpContext.User.Identity.IsAuthenticated)
+            {
+                var patruljeData = new PatruljeInfoModel();
+
+                var data = await context.Patruljer.Include(x => x.Points).ThenInclude(x => x.Poster).FirstOrDefaultAsync(x => x.Id == id);
+
+                if (data != null)
+                {
+                    patruljeData.patrulje = data;
+
+                    patruljeData.totalPoints = data.Points.Sum(x => x.Points);
+
+                    patruljeData.totalTurnout = data.Points.Sum(x => x.Turnout);
+                }
+                else
+                {
+                    return NotFound();
+                }
+
+                return View("PatruljeInfo", patruljeData);
+            }
+
             if (id == 0)
             {
                 if (string.IsNullOrEmpty(Request.Cookies["Post"]))
@@ -98,6 +119,7 @@ namespace pointMaster.Controllers
             return View(vm);
         }
 
+        [Authorize(Policy = Roles.Postmaster)]
         [HttpPost]
         public async Task<IActionResult> GivPoint(int id, GivPointViewModel point)
         {
@@ -129,6 +151,7 @@ namespace pointMaster.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Policy = Roles.Postmaster)]
         public async Task<IActionResult> SkiftPost()
         {
             var vm = new SelectPostViewModel();
@@ -138,6 +161,7 @@ namespace pointMaster.Controllers
             return View(vm);
         }
 
+        [Authorize(Policy = Roles.Postmaster)]
         public IActionResult SelectPost(int id)
         {
             var cookieOptions = new CookieOptions();
@@ -150,6 +174,7 @@ namespace pointMaster.Controllers
             return Redirect("/");
         }
 
+        [Authorize(Policy = Roles.Editor)]
         public ActionResult DeletePoint(int id)
         {
             var point = context.Points.FirstOrDefault(p => p.Id == id);
@@ -182,5 +207,11 @@ namespace pointMaster.Controllers
     {
         public List<Point> points { get; set; } = null!;
         public bool AllowedToDelete { get; set; } = false;
+    }
+    public class PatruljeInfoModel
+    {
+        public Patrulje patrulje { get; set; } = null!;
+        public int totalPoints { get; set; }
+        public int totalTurnout { get; set; }
     }
 }
