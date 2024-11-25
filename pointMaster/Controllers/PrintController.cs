@@ -25,7 +25,7 @@ namespace pointMaster.Controllers
 			foreach (var item in vm.patruljer)
 			{
 				QRCodeGenerator QrGenerator = new QRCodeGenerator();
-				QRCodeData QrCodeInfo = QrGenerator.CreateQrCode("https://smallbenji.tech", QRCodeGenerator.ECCLevel.Q);
+				QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(Request.Host.Host + "/point/givpoint/" + item.Id, QRCodeGenerator.ECCLevel.Q);
 
 				vm.QRcode.Add(item.Id, "data:image/png;base64," + Convert.ToBase64String(new PngByteQRCode(QrCodeInfo).GetGraphic(20)));
 			}
