@@ -143,14 +143,16 @@ export default defineComponent({
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
         margin: auto;
     }
-}
 
-.stat-title {
+    &-title {
     font-weight: 700;
     font-size: 1.25rem;
-}
+    margin: 0;
+    }
 
-.stat .stat-value {
-    font-size: 2rem;
+    &-value {
+    font-weight: 400;
+    font-size: 1.5rem;
+}
 }
 </style>

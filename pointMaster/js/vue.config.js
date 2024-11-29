@@ -4,6 +4,14 @@ module.exports = {
     publicPath: "./", // Use relative paths for assets
     filenameHashing: false, // Disable hash in filenames
     runtimeCompiler: true, // Enable runtime compilation
+    css: {
+        extract: false,
+        loaderOptions: {
+            sass: {
+                implementation: require('sass'),
+            }
+        }
+    },
     configureWebpack: {
         resolve: {
             extensions: ['.vue', '.js', '.json'],
