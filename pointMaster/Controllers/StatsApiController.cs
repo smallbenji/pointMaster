@@ -80,7 +80,7 @@ namespace pointMaster.Controllers
 
             vm.Add(new StatModel
             {
-                Title = "Points givet",
+                Title = "Points givet ialt",
                 Value = pointData.Sum(x => x.Points + x.Turnout).ToString()
             });
 
