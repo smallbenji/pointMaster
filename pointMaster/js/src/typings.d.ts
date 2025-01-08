@@ -8,6 +8,12 @@ type Point = {
 }
 
 type Stat = {
-    Title: string;
-    Value: string;
+    title: string;
+    value: string;
+}
+
+type StatData = {
+    stats: any;
+    pointRatio: any;
+    pointChartModels: any;
 }

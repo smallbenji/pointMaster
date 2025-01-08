@@ -3,6 +3,7 @@ using Keycloak.AuthServices.Authorization;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using pointMaster.Components;
 using pointMaster.Controllers;
 using pointMaster.Data;
 
@@ -55,7 +56,11 @@ builder
         options.ForwardedHeaders = Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedFor | Microsoft.AspNetCore.HttpOverrides.ForwardedHeaders.XForwardedProto;
     });
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
+
+app.MapHub<DataHub>("/DataHub");
 
 if (!app.Environment.IsDevelopment())
 {

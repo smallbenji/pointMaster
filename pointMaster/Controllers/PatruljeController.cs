@@ -131,7 +131,7 @@ namespace pointMaster.Controllers
         {
             public List<Patrulje> patruljeModels { get; set; } = null!;
             public Dictionary<int, int> patruljePoints { get; set; } = null!;
-            public Dictionary<int, int> patruljeTurnout {  get; set; } = null!;
+            public Dictionary<int, int> patruljeTurnout { get; set; } = null!;
         }
     }
 }

@@ -1,6 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace pointMaster.Controllers
 {
@@ -45,7 +44,8 @@ namespace pointMaster.Controllers
     {
         public List<NavUrl> links { get; set; } = null!;
     }
-    public class NavUrl {
+    public class NavUrl
+    {
         public NavUrl() { }
         public NavUrl(string title, string url)
         {

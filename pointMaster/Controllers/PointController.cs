@@ -89,7 +89,8 @@ namespace pointMaster.Controllers
 
             var patrulje = await context.Patruljer.FindAsync(id);
 
-            if (patrulje != null) {
+            if (patrulje != null)
+            {
                 vm.Patrulje = patrulje;
             }
             else

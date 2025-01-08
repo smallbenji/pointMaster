@@ -25,7 +25,7 @@ namespace pointMaster.Controllers
             var patruljer = await context.Patruljer.Include(p => p.Points).ToListAsync();
 
             vm.Samlet = new List<PatruljePlacering>();
-            vm.Turnout= new List<PatruljePlacering>();
+            vm.Turnout = new List<PatruljePlacering>();
             vm.Points = new List<PatruljePlacering>();
 
             foreach (var patrulje in patruljer)
@@ -52,7 +52,7 @@ namespace pointMaster.Controllers
             vm.Samlet = vm.Samlet.OrderByDescending(x => x.point).ToList();
             vm.Points = vm.Points.OrderByDescending(x => x.point).ToList();
             vm.Turnout = vm.Turnout.OrderByDescending(x => x.point).ToList();
-            
+
 
             return View(vm);
         }

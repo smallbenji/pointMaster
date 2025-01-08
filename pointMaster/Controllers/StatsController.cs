@@ -1,20 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using pointMaster.Data;
-using pointMaster.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace pointMaster.Controllers
 {
     public class StatsController : Controller
     {
-        private readonly DataContext dataContext;
+        public StatsController() { }
 
-        public StatsController(DataContext dataContext)
-        {
-            this.dataContext = dataContext;
-        }
-        public async Task<IActionResult> Index()
+        [Authorize(Policy = Roles.Editor)]
+        public IActionResult Index()
         {
             return View();
         }
