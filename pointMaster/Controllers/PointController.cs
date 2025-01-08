@@ -175,13 +175,13 @@ namespace pointMaster.Controllers
         }
 
         [Authorize(Policy = Roles.Editor)]
-        public ActionResult DeletePoint(int id)
+        public async Task<ActionResult> DeletePoint(int id)
         {
             var point = context.Points.FirstOrDefault(p => p.Id == id);
             if (point == null) { return NotFound(); }
 
             context.Points.Remove(point);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }

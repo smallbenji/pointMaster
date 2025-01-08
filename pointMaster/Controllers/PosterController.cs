@@ -47,7 +47,7 @@ namespace pointMaster.Controllers
         }
 
         [HttpGet]
-        public ActionResult SletPost(int id)
+        public async Task<ActionResult> SletPost(int id)
         {
             var post = _context.Poster.Find(id);
 
@@ -57,7 +57,7 @@ namespace pointMaster.Controllers
             }
 
             _context.Poster.Remove(post);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }

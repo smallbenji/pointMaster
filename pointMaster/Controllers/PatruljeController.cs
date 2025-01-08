@@ -49,14 +49,14 @@ namespace pointMaster.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Patrulje patrulje)
+        public async Task<IActionResult> Create(Patrulje patrulje)
         {
             patrulje.DateCreated = DateTime.UtcNow;
 
-            _context.Patruljer.Add(patrulje);
-            _context.SaveChanges();
+            await _context.Patruljer.AddAsync(patrulje);
+            await _context.SaveChangesAsync();
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> AddMedlem(int? id)
@@ -106,7 +106,7 @@ namespace pointMaster.Controllers
             if (medlem != null)
             {
                 _context.PatruljeMedlemmer.Remove(medlem);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Index));
@@ -121,7 +121,7 @@ namespace pointMaster.Controllers
             if (patrulje != null)
             {
                 _context.Patruljer.Remove(patrulje);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
 
             return RedirectToAction(nameof(Index));
