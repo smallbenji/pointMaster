@@ -161,7 +161,6 @@ export default defineComponent({
         margin-bottom: 6rem;
 
         .box {
-            height: 6rem;
             width: 12rem;
             padding: 1rem;
             background-color: rgba(0,0,0,.2);
@@ -172,6 +171,7 @@ export default defineComponent({
 
             .header {
                 font-size: 1.25rem;
+                font-weight: bolder;
             }
             .content {
                 font-size: 1rem;

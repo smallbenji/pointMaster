@@ -145,7 +145,7 @@ namespace pointMaster.Controllers
 
             vm.Add(new StatModel
             {
-                Title = "Antal medlemmer",
+                Title = "Medlemmer",
                 Value = medlemsData.Count().ToString()
             });
 
