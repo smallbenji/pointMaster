@@ -129,9 +129,9 @@ namespace pointMaster.Controllers
 
         public class IndexViewModel
         {
-            public List<Patrulje> patruljeModels { get; set; } = null!;
-            public Dictionary<int, int> patruljePoints { get; set; } = null!;
-            public Dictionary<int, int> patruljeTurnout { get; set; } = null!;
+            public List<Patrulje> patruljeModels { get; set; }
+            public Dictionary<int, int> patruljePoints { get; set; }
+            public Dictionary<int, int> patruljeTurnout { get; set; }
         }
     }
 }

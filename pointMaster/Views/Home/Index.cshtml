@@ -5,6 +5,10 @@
 
 <div>
     <h1>Velkommen til PointMaster</h1>
+    @if(Model.Post != null)
+    {
+        <p>Du giver point som @Model.Post.Name</p>
+    }
 </div>
 <div class="container">
     <div class="row">
@@ -21,11 +25,11 @@
                 <tbody>
                     @for (var i = 0; i < Model.Points.Count; i++)
                     {
-                            <tr>
-                                <td>@(i + 1)</td>
-                                <td>@Model.Points[i].Patrulje.Name</td>
-                                <td>@Model.Points[i].point</td>
-                            </tr>
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@Model.Points[i].Patrulje.Name</td>
+                            <td>@Model.Points[i].point</td>
+                        </tr>
                     }
                 </tbody>
             </table>

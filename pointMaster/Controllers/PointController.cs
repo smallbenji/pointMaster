@@ -190,28 +190,28 @@ namespace pointMaster.Controllers
 
     public class SelectPostViewModel
     {
-        public List<Post> Poster { get; set; } = null!;
+        public List<Post> Poster { get; set; }
     }
 
     public class GivPointViewModel
     {
-        public Post Runde { get; set; } = null!;
-        public Patrulje Patrulje { get; set; } = null!;
+        public Post Runde { get; set; }
+        public Patrulje Patrulje { get; set; }
         public Point points { get; set; } = new Point();
     }
     public class SkiftPatruljeViewModel
     {
-        public List<Patrulje> Patruljer { get; set; } = null!;
-        public Post? post { get; set; } = null!;
+        public List<Patrulje> Patruljer { get; set; }
+        public Post? post { get; set; }
     }
     public class PointViewModel
     {
-        public List<Point> points { get; set; } = null!;
+        public List<Point> points { get; set; }
         public bool AllowedToDelete { get; set; } = false;
     }
     public class PatruljeInfoModel
     {
-        public Patrulje patrulje { get; set; } = null!;
+        public Patrulje patrulje { get; set; }
         public int totalPoints { get; set; }
         public int totalTurnout { get; set; }
     }

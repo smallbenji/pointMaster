@@ -51,9 +51,9 @@ namespace pointMaster.Controllers
     public class PointChartModel
     {
         [JsonProperty("name")]
-        public string Name { get; set; } = null!;
+        public string Name { get; set; }
         [JsonProperty("data")]
-        public List<PointChartDataModel> Data { get; set; } = null!;
+        public List<PointChartDataModel> Data { get; set; }
 
         public static async Task<List<PointChartModel>> Calculate(DataContext dataContext)
         {
@@ -101,14 +101,14 @@ namespace pointMaster.Controllers
     }
     public class PointChartDataModel
     {
-        public string x { get; set; } = null!;
+        public string x { get; set; }
         public int y { get; set; }
     }
 
     public class StatModel
     {
-        public string Title { get; set; } = null!;
-        public string Value { get; set; } = null!;
+        public string Title { get; set; }
+        public string Value { get; set; }
 
         public static async Task<List<StatModel>> Calculate(DataContext dataContext)
         {
@@ -156,9 +156,9 @@ namespace pointMaster.Controllers
     public class PointRatioModel
     {
         [JsonProperty("names")]
-        public List<string> Names { get; set; } = null!;
+        public List<string> Names { get; set; }
         [JsonProperty("data")]
-        public List<int> Data { get; set; } = null!;
+        public List<int> Data { get; set; }
 
         public static async Task<PointRatioModel> Calculate(DataContext dataContext)
         {

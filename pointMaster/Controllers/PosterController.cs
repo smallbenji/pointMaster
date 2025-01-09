@@ -64,7 +64,7 @@ namespace pointMaster.Controllers
 
         public class RundeViewModel
         {
-            public List<Post> Rounds { get; set; } = null!;
+            public List<Post> Rounds { get; set; }
         }
     }
 }

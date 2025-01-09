@@ -42,7 +42,7 @@ namespace pointMaster.Controllers
 
     public class HeaderNavViewModel
     {
-        public List<NavUrl> links { get; set; } = null!;
+        public List<NavUrl> links { get; set; }
     }
     public class NavUrl
     {
@@ -52,7 +52,7 @@ namespace pointMaster.Controllers
             this.Title = title;
             this.Url = url;
         }
-        public string Url { get; set; } = null!;
-        public string Title { get; set; } = null!;
+        public string Url { get; set; }
+        public string Title { get; set; }
     }
 }

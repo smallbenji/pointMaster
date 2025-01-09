@@ -9,10 +9,13 @@
 	<div class="print-card">
 		<div class="patrulje-info">
 			<h1>@patrulje.Name</h1>
-			<p>Medlemmer:</p>
-			@foreach (var medlem in patrulje.PatruljeMedlems)
+			@if(patrulje.PatruljeMedlems.Any())
 			{
-				<p>@medlem.Name</p>
+				<p>Medlemmer:</p>
+				@foreach (var medlem in patrulje.PatruljeMedlems)
+				{
+					<p>@medlem.Name</p>
+				}
 			}
 		</div>
 		<div class="flex-grow"></div>

@@ -1,0 +1,20 @@
+﻿@model pointMaster.Controllers.PrintPosterModel;
+@{
+	Layout = "_Point";
+	ViewData["Title"] = "Patruljer";
+}
+
+@foreach (var post in Model.poster)
+{
+	<div class="print-card">
+		<div class="patrulje-info">
+			<h1>@post.Name</h1>
+		</div>
+		<div class="flex-grow"></div>
+		<img src="@Model.QRcode[post.Id]" width="300" height="300" />
+	</div>
+}
+
+<script>
+	print()
+</script>

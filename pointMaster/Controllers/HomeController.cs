@@ -53,6 +53,13 @@ namespace pointMaster.Controllers
             vm.Points = vm.Points.OrderByDescending(x => x.point).ToList();
             vm.Turnout = vm.Turnout.OrderByDescending(x => x.point).ToList();
 
+            var postId = Request.Cookies["Post"];
+            if (postId != null)
+            {
+                int.TryParse(postId, out var id);
+                var post = await context.Poster.FindAsync(id);
+                vm.Post = post;
+            }
 
             return View(vm);
         }
@@ -77,13 +84,14 @@ namespace pointMaster.Controllers
 
     public class HomePageViewModel
     {
-        public List<PatruljePlacering> Samlet { get; set; } = null!;
-        public List<PatruljePlacering> Turnout { get; set; } = null!;
-        public List<PatruljePlacering> Points { get; set; } = null!;
+        public List<PatruljePlacering> Samlet { get; set; }
+        public List<PatruljePlacering> Turnout { get; set; }
+        public List<PatruljePlacering> Points { get; set; }
+        public Post Post { get; set; }
     }
     public class PatruljePlacering
     {
-        public Patrulje Patrulje { get; set; } = null!;
+        public Patrulje Patrulje { get; set; }
         public int point { get; set; }
     }
 }
