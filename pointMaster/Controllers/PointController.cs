@@ -117,6 +117,12 @@ namespace pointMaster.Controllers
                 return NotFound();
             }
 
+            var point = context.Points.FirstOrDefault(x => x.Poster.Id == postIntId && x.Patrulje.Id == id);
+            if (point != null)
+            {
+                vm.points = point;
+            }
+
             return View(vm);
         }
 
