@@ -44,6 +44,9 @@ export default defineComponent({
             },
             xaxis: {
                 type: "datetime",
+                labels: {
+                    datetimeUTC: false,
+                }
             },
             series: [],
         }
