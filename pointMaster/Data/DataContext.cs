@@ -41,9 +41,9 @@ namespace pointMaster.Data
             return result;
         }
 
-        public DbSet<Patrulje> Patruljer { get; set; } = default!;
-        public DbSet<PatruljeMedlem> PatruljeMedlemmer { get; set; } = default!;
-        public DbSet<Post> Poster { get; set; } = default!;
-        public DbSet<Point> Points { get; set; } = default!;
+        public DbSet<Patrulje> Patruljer { get; set; }
+        public DbSet<PatruljeMedlem> PatruljeMedlemmer { get; set; }
+        public DbSet<Post> Poster { get; set; }
+        public DbSet<Point> Points { get; set; }
     }
 }
