@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -7,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace pointMaster.Migrations
 {
     /// <inheritdoc />
-    public partial class Addingblockings : Migration
+    public partial class DateTime : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,7 +17,7 @@ namespace pointMaster.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -32,11 +31,9 @@ namespace pointMaster.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Location = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    BlockPoint = table.Column<bool>(type: "boolean", nullable: false),
-                    BlockTurnout = table.Column<bool>(type: "boolean", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    Location = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -50,9 +47,9 @@ namespace pointMaster.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "text", nullable: false),
                     Age = table.Column<int>(type: "integer", nullable: false),
-                    PatruljeId = table.Column<int>(type: "integer", nullable: true),
+                    PatruljeId = table.Column<int>(type: "integer", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -62,7 +59,8 @@ namespace pointMaster.Migrations
                         name: "FK_PatruljeMedlemmer_Patruljer_PatruljeId",
                         column: x => x.PatruljeId,
                         principalTable: "Patruljer",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -73,8 +71,8 @@ namespace pointMaster.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Points = table.Column<int>(type: "integer", nullable: false),
                     Turnout = table.Column<int>(type: "integer", nullable: false),
-                    PatruljeId = table.Column<int>(type: "integer", nullable: true),
-                    PosterId = table.Column<int>(type: "integer", nullable: true),
+                    PatruljeId = table.Column<int>(type: "integer", nullable: false),
+                    PosterId = table.Column<int>(type: "integer", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
@@ -84,12 +82,14 @@ namespace pointMaster.Migrations
                         name: "FK_Points_Patruljer_PatruljeId",
                         column: x => x.PatruljeId,
                         principalTable: "Patruljer",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Points_Poster_PosterId",
                         column: x => x.PosterId,
                         principalTable: "Poster",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

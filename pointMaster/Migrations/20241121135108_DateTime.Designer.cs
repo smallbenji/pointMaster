@@ -12,8 +12,8 @@ using pointMaster.Data;
 namespace pointMaster.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250212090035_Adding blockings")]
-    partial class Addingblockings
+    [Migration("20241121135108_DateTime")]
+    partial class DateTime
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,7 @@ namespace pointMaster.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -59,9 +60,10 @@ namespace pointMaster.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("PatruljeId")
+                    b.Property<int>("PatruljeId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -82,13 +84,13 @@ namespace pointMaster.Migrations
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("PatruljeId")
+                    b.Property<int>("PatruljeId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Points")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("PosterId")
+                    b.Property<int>("PosterId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Turnout")
@@ -111,22 +113,19 @@ namespace pointMaster.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("BlockPoint")
-                        .HasColumnType("boolean");
-
-                    b.Property<bool>("BlockTurnout")
-                        .HasColumnType("boolean");
-
                     b.Property<DateTime?>("DateCreated")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Location")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -138,7 +137,9 @@ namespace pointMaster.Migrations
                 {
                     b.HasOne("pointMaster.Models.Patrulje", "Patrulje")
                         .WithMany("PatruljeMedlems")
-                        .HasForeignKey("PatruljeId");
+                        .HasForeignKey("PatruljeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Patrulje");
                 });
@@ -147,11 +148,15 @@ namespace pointMaster.Migrations
                 {
                     b.HasOne("pointMaster.Models.Patrulje", "Patrulje")
                         .WithMany("Points")
-                        .HasForeignKey("PatruljeId");
+                        .HasForeignKey("PatruljeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("pointMaster.Models.Post", "Poster")
                         .WithMany()
-                        .HasForeignKey("PosterId");
+                        .HasForeignKey("PosterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Patrulje");
 
