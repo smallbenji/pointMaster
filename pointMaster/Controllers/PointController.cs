@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using pointMaster.Data;
 using pointMaster.Models;
+using System.Text;
 
 namespace pointMaster.Controllers
 {
@@ -191,6 +192,30 @@ namespace pointMaster.Controllers
             await context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult GetPointsCSV()
+        {
+            var points = context.Points.Include(x => x.Patrulje).Include(x => x.Poster).ToList();
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("ID;PostName;PatruljeName;Points;Turnout;");
+
+            foreach (var point in points)
+            {
+                var id = point.Id;
+                var q = point.Poster.Name;
+                var e = point.Patrulje.Name;
+                var p = point.Points;
+                var t = point.Turnout;
+
+                string line = string.Join(";", id, q, e, p, t);
+
+                sb.AppendLine(line);
+            }
+
+            return Ok(sb.ToString());
         }
     }
 
