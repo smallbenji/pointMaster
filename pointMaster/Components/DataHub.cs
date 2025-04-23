@@ -21,11 +21,6 @@ namespace pointMaster.Components
             return base.OnConnectedAsync();
         }
 
-        public async Task SendMessage(string user, string message)
-        {
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
-        }
-
         public async Task SendData()
         {
             var v0 = await StatModel.Calculate(dataContext);
