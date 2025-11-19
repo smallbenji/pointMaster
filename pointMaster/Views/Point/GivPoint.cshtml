@@ -13,11 +13,11 @@
     <form asp-action="GivPoint">
     <div class="inputfield">
         <h4>Point</h4>
-        <input asp-for="points.Points" type="number" min="0" class="form-control" />
+        <input asp-for="points.Points" type="number" min="0" max="10" class="form-control" />
     </div>
     <div class="inputfield">
         <h4>Turnout</h4>
-        <input asp-for="points.Turnout" type="number" min="0" class="form-control" />
+        <input asp-for="points.Turnout" type="number" min="0" max="10" class="form-control" />
     </div>
 
     <div class="sendButton">
